@@ -9,8 +9,12 @@ import (
 
 var repo Repository
 
-func RegisterHandlers(router *mux.Router) {
+func Init() {
 	repo = NewRepository()
+}
+
+func RegisterHandlers(router *mux.Router) {
+	Init()
 	router.HandleFunc("/", Get).Methods(http.MethodGet)
 	router.HandleFunc("/", Set).Methods(http.MethodPost)
 	router.HandleFunc("/", Flush).Methods(http.MethodDelete)
@@ -31,5 +35,5 @@ func Set(w http.ResponseWriter, r *http.Request) {
 
 func Flush(w http.ResponseWriter, r *http.Request) {
 	repo.Flush()
-	response.JsonSuccess(w, "Store successfully flushed.")
+	response.JsonSuccess(w, "store successfully flushed")
 }
