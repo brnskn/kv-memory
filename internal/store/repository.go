@@ -16,12 +16,14 @@ type Repository interface {
 
 var _ Repository = &repository{}
 
+// Creates new repository
 func NewRepository() *repository {
 	return &repository{}
 }
 
 type repository struct{}
 
+// Gets value of given key from the store and returns the store entity
 func (repository *repository) Get(key string) (entity.Store, error) {
 	value, found := store.Instance().Get(key)
 	if !found {
@@ -33,6 +35,7 @@ func (repository *repository) Get(key string) (entity.Store, error) {
 	}, nil
 }
 
+// Sets given value to given key on the store and returns the store entity
 func (repository *repository) Set(key string, value string) entity.Store {
 	store.Instance().Set(key, value)
 	return entity.Store{
@@ -41,6 +44,7 @@ func (repository *repository) Set(key string, value string) entity.Store {
 	}
 }
 
+// Deletes all items from the store
 func (repository *repository) Flush() {
 	store.Instance().Flush()
 }

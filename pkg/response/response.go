@@ -9,6 +9,7 @@ type Response struct {
 	Message string `json:"message"`
 }
 
+// Writes interface as a json to response writer
 func Json(w http.ResponseWriter, v interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	err := json.NewEncoder(w).Encode(&v)
@@ -18,6 +19,7 @@ func Json(w http.ResponseWriter, v interface{}) {
 	}
 }
 
+// Writes success message as a json to response writer
 func JsonSuccess(w http.ResponseWriter, m string) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
@@ -30,6 +32,7 @@ func JsonSuccess(w http.ResponseWriter, m string) {
 	}
 }
 
+// Writes error message as a json to response writer
 func JsonError(w http.ResponseWriter, e error) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(400)
