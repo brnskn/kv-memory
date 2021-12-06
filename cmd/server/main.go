@@ -16,12 +16,11 @@ func main() {
 	config.Load()
 	interval := time.Minute *
 		time.Duration(config.GetInt("AUTO_SAVE_INTERVAL", 5))
-	s.
-		Instance().
-		StartAutoSaver(interval)
+	s.Instance().StartAutoSaver(interval)
 
 	router := mux.NewRouter()
 	store.RegisterHandlers(router)
-	addr := fmt.Sprintf("%s:%s", config.Get("BIND_HOST", "0.0.0.0"), config.Get("PORT", "8080"))
+	addr := fmt.Sprintf("%s:%s", config.Get("BIND_HOST", "0.0.0.0"),
+		config.Get("PORT", "8080"))
 	log.Fatal(http.ListenAndServe(addr, router))
 }
